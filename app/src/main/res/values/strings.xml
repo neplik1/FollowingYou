@@ -6,8 +6,10 @@
     <string name="hint_email">Email</string>
     <string name="hint_name">Name</string>
     <string name="hint_password">Password</string>
+    <string name="hint_new_password">New password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="sign_up">Sign Up</string>
+    <string name="change_password">Сhange password</string>
     <string name="tap_to_log_in">Tap To Log In</string>
     <string name="forgot_password">Forgot password?</string>
 </resources>
