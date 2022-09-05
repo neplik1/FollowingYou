@@ -1,10 +1,11 @@
-package com.example.followingyou
+package com.example.followingyou.presentation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.followingyou.R
 
 class LogInFragment : Fragment() {
 
