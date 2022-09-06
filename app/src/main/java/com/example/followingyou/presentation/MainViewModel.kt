@@ -13,10 +13,9 @@ class MainViewModel : ViewModel() {
     private val getNewsListUseCase = GetNewsListUseCase(repository)
     private val deleteNewsItemUseCase = DeleteNewsItemUseCase(repository)
 
-    val newsList = MutableLiveData<List<NewsItem>>()
+    val newsList = getNewsListUseCase.getNewsList()
 
-    fun getNewsList() {
-        val list = getNewsListUseCase.getNewsList()
-        newsList.value = list
+    fun deleteNewsItem(newsItem: NewsItem) {
+        deleteNewsItemUseCase.deleteNewsItem(newsItem)
     }
 }
