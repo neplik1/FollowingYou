@@ -2,7 +2,7 @@
     <string name="app_name">Following You</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="login_head">LogIn</string>
+    <string name="login_head">Log In</string>
     <string name="hint_email">Email</string>
     <string name="hint_name">Name</string>
     <string name="hint_password">Password</string>
