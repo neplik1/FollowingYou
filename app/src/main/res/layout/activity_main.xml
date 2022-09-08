@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-<androidx.fragment.app.FragmentContainerView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_container"
-    android:name="com.example.followingyou.presentation.LogInFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.LogInFragment"
-    tools:layout="@layout/fragment_log_in" />
-    </layout>
+
+    <androidx.fragment.app.FragmentContainerView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/fragment_container"
+        android:name="com.example.followingyou.presentation.SingUpFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.LogInFragment"
+        tools:layout="@layout/fragment_log_in" />
+</layout>

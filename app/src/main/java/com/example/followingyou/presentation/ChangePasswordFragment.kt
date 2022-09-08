@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.followingyou.databinding.FragmentChangePasswordBinding
 import com.example.followingyou.databinding.FragmentLogInBinding
 
-class LogInFragment : Fragment() {
+class ChangePasswordFragment : Fragment() {
 
-    private var _binding: FragmentLogInBinding? = null
-    private val binding: FragmentLogInBinding
-        get() = _binding ?: throw RuntimeException("FragmentLogInBinding == null")
+    private var _binding: FragmentChangePasswordBinding? = null
+    private val binding: FragmentChangePasswordBinding
+        get() = _binding ?: throw RuntimeException("FragmentChangePasswordBinding == null")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +23,7 @@ class LogInFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentLogInBinding.inflate(inflater, container, false)
+        _binding = FragmentChangePasswordBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -36,10 +37,10 @@ class LogInFragment : Fragment() {
     }
 
     companion object {
-        const val NAME = "LogInFragment"
+        const val NAME = "ChangePasswordBindingFragment"
 
-        fun newInstance(): LogInFragment {
-            return LogInFragment()
+        fun newInstance(): ChangePasswordFragment {
+            return ChangePasswordFragment()
         }
     }
 }
