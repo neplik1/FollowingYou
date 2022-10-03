@@ -37,26 +37,22 @@ class SingupViewModel : ViewModel() {
     }
 
     private fun validateFields(login: String, password: String, confirmPassword: String): Boolean {
-
         // Just for testing
 //        val loginValid = true
 //        val passwordValid = true
 
-//         Uncomment this for true validation
-        val loginValid = login.trim().length >= MIN_LENGTH
+        // Uncomment this for true validation
+        val loginValid = login.trim().isNotEmpty()
         val passwordValid = password.trim().length >= MIN_LENGTH
-        val passwordConfirmValid = confirmPassword.trim().length >= MIN_LENGTH
-
+        val passwordConfirmValid = confirmPassword.trim() == password.trim()
 
         _isLoginFieldCorrect.value = loginValid
         _isPasswordFieldCorrect.value = passwordValid
         _isPasswordConfirmFieldCorrect.value = passwordConfirmValid
-        return loginValid && passwordValid
+        return loginValid && passwordValid && passwordConfirmValid
     }
 
     companion object {
         private const val MIN_LENGTH = 6
-//        private const val MIN_PASSWORD_LENGTH = 6
     }
-
 }

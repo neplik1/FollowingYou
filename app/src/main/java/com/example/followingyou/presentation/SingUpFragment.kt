@@ -20,7 +20,6 @@ class SingUpFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -52,13 +51,12 @@ class SingUpFragment : Fragment() {
             binding.etConfirmPassword.error = if (correct) {
                 null
             } else {
-                getString(R.string.error_password_text)
+                getString(R.string.error_confirmPassword_text)
             }
         }
 
         viewModel.isAuthorized.observe(viewLifecycleOwner) { authorized ->
             if (authorized) {
-                launchChooseLogInFragment()
                 viewModel.authorizedStatusProcessed()
             }
         }
@@ -78,49 +76,40 @@ class SingUpFragment : Fragment() {
             forgotPassword.setOnClickListener {
                 launchChangePasswordFragment()
             }
-
         }
         launchAddMode()
     }
-//        binding.toggleLogInButton.setOnClickListener {
-//            launchChooseLogInFragment()
-//        }
-//        binding.forgotPassword.setOnClickListener {
-//            launchChangePasswordFragment()
-//        }
 
+    private fun launchChooseLogInFragment() {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, LogInFragment.newInstance())
+            .addToBackStack(LogInFragment.NAME)
+            .commit()
+    }
 
+    private fun launchChangePasswordFragment() {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, ChangePasswordFragment.newInstance())
+            .addToBackStack(ChangePasswordFragment.NAME)
+            .commit()
+    }
 
-       private fun launchChooseLogInFragment() {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, LogInFragment.newInstance())
-                .addToBackStack(LogInFragment.NAME)
-                .commit()
+    private fun launchAddMode() {
+        binding.signUpButton.setOnClickListener {
+            authorize()
+            Toast.makeText(context, "Sing Up", Toast.LENGTH_SHORT).show()
         }
-
-       private fun launchChangePasswordFragment() {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, ChangePasswordFragment.newInstance())
-                .addToBackStack(ChangePasswordFragment.NAME)
-                .commit()
-        }
-
-        private fun launchAddMode() {
-            binding.signUpButton.setOnClickListener {
-                authorize()
-                Toast.makeText(context, "Sing Up", Toast.LENGTH_SHORT).show()
-            }
-        }
+    }
 
     private fun authorize() {
         val login = binding.etEmail.text?.toString() ?: ""
         val password = binding.etPassword.text?.toString() ?: ""
-        val confirmPassword = binding.etConfirmPassword.text?.toString()  ?:""
+        val confirmPassword = binding.etConfirmPassword.text?.toString() ?: ""
         viewModel.authorize(login, password, confirmPassword)
     }
 
-        override fun onDestroyView() {
-            super.onDestroyView()
-            _binding = null
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
+}

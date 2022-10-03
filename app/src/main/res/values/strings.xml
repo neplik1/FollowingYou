@@ -15,5 +15,6 @@
     <string name="forgot_password">Forgot password?</string>
 
     <string name="error_password_text">Password too short</string>
-    <string name="error_email_text">Email too short</string>
+    <string name="error_email_text">Please input email</string>
+    <string name="error_confirmPassword_text">Passwords have to match</string>
 </resources>

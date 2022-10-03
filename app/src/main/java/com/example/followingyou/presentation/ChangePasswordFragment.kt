@@ -5,13 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.followingyou.R
 import com.example.followingyou.databinding.FragmentChangePasswordBinding
-import com.example.followingyou.databinding.FragmentLogInBinding
+
 
 class ChangePasswordFragment : Fragment() {
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: SingupViewModel
 
     private var _binding: FragmentChangePasswordBinding? = null
     private val binding: FragmentChangePasswordBinding
@@ -32,19 +34,60 @@ class ChangePasswordFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        launchChangeMode()
-    }
+        viewModel = ViewModelProvider(this)[SingupViewModel::class.java]
+        viewModel.isLoginFieldCorrect.observe(viewLifecycleOwner) { correct ->
+            binding.etEmail.error = if (correct) {
+                null
+            } else {
+                getString(R.string.error_email_text)
+            }
+        }
+        viewModel.isPasswordFieldCorrect.observe(viewLifecycleOwner) { correct ->
+            binding.etNewPassword.error = if (correct) {
+                null
+            } else {
+                getString(R.string.error_password_text)
+            }
+        }
+        viewModel.isPasswordConfirmFieldCorrect.observe(viewLifecycleOwner) { correct ->
+            binding.etConfirmPassword.error = if (correct) {
+                null
+            } else {
+                getString(R.string.error_confirmPassword_text)
+            }
+        }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        viewModel.isAuthorized.observe(viewLifecycleOwner) { authorized ->
+            if (authorized) {
+                viewModel.authorizedStatusProcessed()
+            }
+        }
+        with(binding) {
+            etEmail.addTextChangedListener {
+                viewModel.resetErrors()
+            }
+            etNewPassword.addTextChangedListener {
+                viewModel.resetErrors()
+            }
+            etConfirmPassword.addTextChangedListener {
+                viewModel.resetErrors()
+            }
+        }
+        launchChangeMode()
     }
 
     private fun launchChangeMode() {
         binding.btnChangePassword.setOnClickListener {
+            authorize()
             Toast.makeText(context, "Password changed", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun authorize() {
+        val login = binding.etEmail.text?.toString() ?: ""
+        val password = binding.etNewPassword.text?.toString() ?: ""
+        val confirmPassword = binding.etConfirmPassword.text?.toString() ?: ""
+        viewModel.authorize(login, password, confirmPassword)
     }
 
     companion object {
@@ -53,5 +96,10 @@ class ChangePasswordFragment : Fragment() {
         fun newInstance(): ChangePasswordFragment {
             return ChangePasswordFragment()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
