@@ -8,6 +8,6 @@
         android:name="com.example.followingyou.presentation.SingUpFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.LogInFragment"
+        tools:context=".presentation.SingupFragment"
         tools:layout="@layout/fragment_log_in" />
 </layout>
