@@ -3,7 +3,7 @@ package com.example.followingyou.domain
 data class NewsItem(
     val name: String,
     val type: Int,
-    val source: String,
+    val source: Boolean,
     var id: Int = UNDEFINED_ID
 ) {
     companion object {

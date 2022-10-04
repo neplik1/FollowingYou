@@ -10,27 +10,35 @@ import com.example.followingyou.domain.NewsItem
 
 class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsItemViewHolder>() {
 
-    val list = listOf<NewsItem>()
-
-    class NewsItemViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val tvName = view.findViewById<TextView>(R.id.tv_name)
-    }
+    var newsList = listOf<NewsItem>()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsItemViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_news, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(
+            R.layout.item_news,
+            parent,
+            false
+        )
         return NewsItemViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: NewsItemViewHolder, position: Int) {
-        val shopItem = list[position]
-        holder.tvName.text = shopItem.name
+        val newsItem = newsList[position]
+        holder.tvName.text = newsItem.name
         holder.view.setOnLongClickListener {
             true
         }
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return newsList.size
     }
+
+    class NewsItemViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+        val tvName = view.findViewById<TextView>(R.id.tv_name)
+    }
+
 }
