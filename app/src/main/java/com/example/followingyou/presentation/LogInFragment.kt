@@ -76,10 +76,18 @@ class LogInFragment : Fragment() {
             .commit()
     }
 
+    private fun launchSuccessLogIn() {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, NewsListFragment.newInstance())
+            .addToBackStack(NewsListFragment.NAME)
+            .commit()
+    }
+
     private fun launchAddMode() {
         binding.logInButton.setOnClickListener {
             authorize()
             Toast.makeText(context, "Log In", Toast.LENGTH_SHORT).show()
+            launchSuccessLogIn()
         }
     }
 

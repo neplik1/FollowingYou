@@ -94,10 +94,18 @@ class SingUpFragment : Fragment() {
             .commit()
     }
 
+    private fun launchSuccessSingUp() {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, NewsListFragment.newInstance())
+            .addToBackStack(NewsListFragment.NAME)
+            .commit()
+    }
+
     private fun launchAddMode() {
         binding.signUpButton.setOnClickListener {
             authorize()
             Toast.makeText(context, "Sing Up", Toast.LENGTH_SHORT).show()
+            launchSuccessSingUp()
         }
     }
 
