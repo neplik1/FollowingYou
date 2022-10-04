@@ -104,8 +104,14 @@ class SingUpFragment : Fragment() {
     private fun launchAddMode() {
         binding.signUpButton.setOnClickListener {
             authorize()
-            Toast.makeText(context, "Sing Up", Toast.LENGTH_SHORT).show()
-            launchSuccessSingUp()
+            if (binding.etEmail.text.isNullOrEmpty() || binding.etPassword.text!!.length <= 5
+                || binding.etPassword.text != binding.etConfirmPassword.text
+            ) {
+                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "Sing Up", Toast.LENGTH_SHORT).show()
+                launchSuccessSingUp()
+            }
         }
     }
 

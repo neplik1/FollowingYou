@@ -20,10 +20,6 @@ class LogInFragment : Fragment() {
     private val binding: FragmentLogInBinding
         get() = _binding ?: throw RuntimeException("FragmentLogInBinding == null")
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -86,8 +82,12 @@ class LogInFragment : Fragment() {
     private fun launchAddMode() {
         binding.logInButton.setOnClickListener {
             authorize()
-            Toast.makeText(context, "Log In", Toast.LENGTH_SHORT).show()
-            launchSuccessLogIn()
+            if (binding.etEmail.text.isNullOrEmpty() || binding.etPassword.text!!.length <=5 ) {
+                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "Log In", Toast.LENGTH_SHORT).show()
+                launchSuccessLogIn()
+            }
         }
     }
 

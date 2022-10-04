@@ -36,7 +36,7 @@ class SingupViewModel : ViewModel() {
         _isAuthorized.value = false
     }
 
-    private fun validateFields(login: String, password: String, confirmPassword: String): Boolean {
+     fun validateFields(login: String, password: String, confirmPassword: String): Boolean {
         // Just for testing
 //        val loginValid = true
 //        val passwordValid = true
