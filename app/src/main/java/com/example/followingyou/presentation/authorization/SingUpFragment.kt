@@ -108,10 +108,13 @@ class SingUpFragment : Fragment() {
         binding.signUpButton.setOnClickListener {
             authorize()
             if (binding.etEmail.text.isNullOrEmpty() || binding.etPassword.text!!.length <= 5
-                || binding.etPassword.text != binding.etConfirmPassword.text
+                || binding.etConfirmPassword.text.isNullOrEmpty()
             ) {
-                auth.createUserWithEmailAndPassword(binding.etEmail.text.toString().
-                trim { it <= ' ' },
+
+                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+            } else {
+                auth.createUserWithEmailAndPassword(binding.etEmail.text.toString()
+                    .trim { it <= ' ' },
                     binding.etPassword.text.toString().trim { it <= ' ' })
                     .addOnCompleteListener(requireActivity()) { task ->
                         if (task.isSuccessful) {
@@ -119,6 +122,8 @@ class SingUpFragment : Fragment() {
                             Log.d(
                                 TAG, "createUserWithEmail:success"
                             )
+                            Toast.makeText(context, "Sing Up", Toast.LENGTH_SHORT).show()
+                            launchSuccessSingUp()
                             val user = auth.currentUser
                             // updateUI(user);
                         } else {
@@ -134,10 +139,6 @@ class SingUpFragment : Fragment() {
                             //updateUI(null);
                         }
                     }
-                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(context, "Sing Up", Toast.LENGTH_SHORT).show()
-                launchSuccessSingUp()
             }
         }
     }
