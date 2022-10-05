@@ -1,4 +1,4 @@
-package com.example.followingyou.presentation
+package com.example.followingyou.presentation.authorization
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

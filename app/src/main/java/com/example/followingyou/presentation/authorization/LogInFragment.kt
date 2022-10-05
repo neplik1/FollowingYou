@@ -1,16 +1,16 @@
-package com.example.followingyou.presentation
+package com.example.followingyou.presentation.authorization
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewOutlineProvider
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.followingyou.R
 import com.example.followingyou.databinding.FragmentLogInBinding
+import com.example.followingyou.presentation.NewsListFragment
 
 class LogInFragment : Fragment() {
 
