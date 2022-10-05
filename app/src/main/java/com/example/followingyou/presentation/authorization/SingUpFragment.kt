@@ -1,6 +1,8 @@
 package com.example.followingyou.presentation.authorization
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +13,15 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.followingyou.R
 import com.example.followingyou.databinding.FragmentSingUpBinding
 import com.example.followingyou.presentation.NewsListFragment
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class SingUpFragment : Fragment() {
     private lateinit var viewModel: SingupViewModel
+    private lateinit var auth: FirebaseAuth
 
     private var _binding: FragmentSingUpBinding? = null
     private val binding: FragmentSingUpBinding
@@ -33,6 +41,7 @@ class SingUpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        auth = Firebase.auth
         viewModel = ViewModelProvider(this)[SingupViewModel::class.java]
         viewModel.isLoginFieldCorrect.observe(viewLifecycleOwner) { correct ->
             binding.etEmail.error = if (correct) {
@@ -108,8 +117,29 @@ class SingUpFragment : Fragment() {
             if (binding.etEmail.text.isNullOrEmpty() || binding.etPassword.text!!.length <= 5
                 || binding.etPassword.text != binding.etConfirmPassword.text
             ) {
+                auth.createUserWithEmailAndPassword(binding.etEmail.text.toString().trim { it <= ' ' },
+                    binding.etPassword.text.toString().trim { it <= ' ' })
+                    .addOnCompleteListener(requireActivity()) { task ->
+                        if (task.isSuccessful) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success"
+                            )
+                            val user = auth.currentUser
+                            // updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure",
+                                task.exception
+                            )
+                            Toast.makeText(context, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show()
+                            //updateUI(null);
+                        }
+                    }
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
             } else {
+
+
                 Toast.makeText(context, "Sing Up", Toast.LENGTH_SHORT).show()
                 launchSuccessSingUp()
             }
@@ -126,5 +156,9 @@ class SingUpFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        private const val TAG = "SingUpFragment"
     }
 }
