@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/margin4"
+    tools:context=".presentation.SelectedNewsFragment">
+
+    <TextView
+        android:id="@+id/tvSource"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin16"
+        android:text="@string/Source"
+        android:textSize="@dimen/text_size" />
+
+    <EditText
+        android:id="@+id/etSource"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin16"
+        android:hint="@string/Source"
+        android:textSize="@dimen/text_size"
+        android:autofillHints="no"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/tvNews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin16"
+        android:text="@string/News"
+        android:textSize="@dimen/text_size" />
+
+    <EditText
+        android:id="@+id/etNews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin16"
+        android:hint="@string/News"
+        android:textSize="@dimen/text_size"
+        android:inputType="text"
+        android:autofillHints="no" />
+
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin50"
+        android:text="@string/ok"
+        android:textSize="@dimen/text_size" />
+
+</LinearLayout>
+
+
