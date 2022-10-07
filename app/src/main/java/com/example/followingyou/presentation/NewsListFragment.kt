@@ -27,7 +27,7 @@ class NewsListFragment : Fragment() {
         setupRecyclerView(view)
         viewModel = ViewModelProvider(this)[NewsListViewModel::class.java]
         viewModel.newsList.observe(viewLifecycleOwner) {
-            newsListAdapter.newsList = it
+            newsListAdapter.submitList(it)
         }
     }
 
@@ -60,7 +60,7 @@ class NewsListFragment : Fragment() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val item = newsListAdapter.newsList[viewHolder.adapterPosition]
+                val item = newsListAdapter.currentList[viewHolder.adapterPosition]
                 viewModel.deleteNewsItem(item)
             }
         }

@@ -1,21 +1,12 @@
 package com.example.followingyou.presentation
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ListAdapter
 import com.example.followingyou.R
 import com.example.followingyou.domain.NewsItem
 
-class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsItemViewHolder>() {
-
-    var newsList = listOf<NewsItem>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class NewsListAdapter: ListAdapter<NewsItem, NewsItemViewHolder>(NewsItemDiffCallback()) {
 
     var onNewsItemClickListener: ((NewsItem) -> Unit)? = null
 
@@ -29,7 +20,7 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsItemViewHolder>
     }
 
     override fun onBindViewHolder(holder: NewsItemViewHolder, position: Int) {
-        val newsItem = this.newsList[position]
+        val newsItem = getItem(position)
         holder.tvName.text = newsItem.name
         holder.view.setOnLongClickListener {
             true
@@ -37,13 +28,6 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsItemViewHolder>
         holder.view.setOnClickListener {
             onNewsItemClickListener?.invoke(newsItem)
         }
-    }
-
-    override fun getItemCount(): Int {
-        return newsList.size
-    }
-
-    class NewsItemViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val tvName = view.findViewById<TextView>(R.id.tv_name)
+        holder.tvName.text = newsItem.name
     }
 }
