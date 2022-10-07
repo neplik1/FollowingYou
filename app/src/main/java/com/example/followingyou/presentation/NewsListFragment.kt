@@ -1,6 +1,7 @@
 package com.example.followingyou.presentation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.followingyou.R
 
 class NewsListFragment : Fragment() {
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: NewsListViewModel
     private lateinit var newsListAdapter: NewsListAdapter
 
     override fun onCreateView(
@@ -23,7 +24,7 @@ class NewsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView(view)
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel = ViewModelProvider(this)[NewsListViewModel::class.java]
         viewModel.newsList.observe(viewLifecycleOwner) {
             newsListAdapter.newsList=it
         }
@@ -33,6 +34,14 @@ class NewsListFragment : Fragment() {
         val rvShopList = view.findViewById<RecyclerView>(R.id.rv_shop_list)
         newsListAdapter = NewsListAdapter()
         rvShopList.adapter = newsListAdapter
+
+        setupClickListener()
+    }
+
+    private fun setupClickListener() {
+        newsListAdapter.onNewsItemClickListener = {
+            Log.d("NewsListFragment", it.toString())
+        }
     }
 
     companion object {

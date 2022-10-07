@@ -3,6 +3,7 @@ package com.example.followingyou.presentation
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.followingyou.R
@@ -16,6 +17,8 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsItemViewHolder>
             notifyDataSetChanged()
         }
 
+    var onNewsItemClickListener: ((NewsItem) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsItemViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
             R.layout.item_news,
@@ -26,10 +29,13 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsItemViewHolder>
     }
 
     override fun onBindViewHolder(holder: NewsItemViewHolder, position: Int) {
-        val newsItem = newsList[position]
+        val newsItem = this.newsList[position]
         holder.tvName.text = newsItem.name
         holder.view.setOnLongClickListener {
             true
+        }
+        holder.view.setOnClickListener {
+            onNewsItemClickListener?.invoke(newsItem)
         }
     }
 
@@ -40,5 +46,4 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsItemViewHolder>
     class NewsItemViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val tvName = view.findViewById<TextView>(R.id.tv_name)
     }
-
 }

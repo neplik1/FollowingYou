@@ -6,7 +6,7 @@ import com.example.followingyou.domain.useCase.DeleteNewsItemUseCase
 import com.example.followingyou.domain.useCase.GetNewsListUseCase
 import com.example.followingyou.domain.NewsItem
 
-class MainViewModel : ViewModel() {
+class NewsListViewModel : ViewModel() {
     private val repository = NewsListRepositoryImpl
 
     private val getNewsListUseCase = GetNewsListUseCase(repository)

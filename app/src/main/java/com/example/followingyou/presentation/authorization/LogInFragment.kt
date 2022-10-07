@@ -18,7 +18,7 @@ import com.google.firebase.ktx.Firebase
 
 class LogInFragment : Fragment() {
 
-    private lateinit var viewModel: SingupViewModel
+    private lateinit var viewModel: LoginViewModel
     private lateinit var auth: FirebaseAuth
 
     private var _binding: FragmentLogInBinding? = null
@@ -36,7 +36,7 @@ class LogInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         auth = Firebase.auth
-        viewModel = ViewModelProvider(this)[SingupViewModel::class.java]
+        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         viewModel.isLoginFieldCorrect.observe(viewLifecycleOwner) { correct ->
             binding.etEmail.error = if (correct) {
                 null
@@ -118,8 +118,7 @@ class LogInFragment : Fragment() {
     private fun authorize() {
         val login = binding.etEmail.text?.toString() ?: ""
         val password = binding.etPassword.text?.toString() ?: ""
-        val confirmPassword = ""
-        viewModel.authorize(login, password, confirmPassword)
+        viewModel.authorize(login, password)
     }
 
     companion object {
