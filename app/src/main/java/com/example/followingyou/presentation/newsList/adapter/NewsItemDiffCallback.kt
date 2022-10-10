@@ -1,4 +1,4 @@
-package com.example.followingyou.presentation
+package com.example.followingyou.presentation.newsList.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.followingyou.domain.model.NewsItem

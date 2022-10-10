@@ -1,4 +1,4 @@
-package com.example.followingyou.presentation
+package com.example.followingyou.presentation.newsList.adapter
 
 import android.view.View
 import android.widget.TextView

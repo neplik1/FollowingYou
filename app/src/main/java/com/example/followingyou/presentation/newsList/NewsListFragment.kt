@@ -1,7 +1,6 @@
-package com.example.followingyou.presentation
+package com.example.followingyou.presentation.newsList
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.followingyou.R
-import com.example.followingyou.presentation.authorization.LogInFragment
+import com.example.followingyou.presentation.SelectedNewsFragment
+import com.example.followingyou.presentation.newsList.adapter.NewsListAdapter
 
 class NewsListFragment : Fragment() {
     private lateinit var viewModel: NewsListViewModel

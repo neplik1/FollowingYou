@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.followingyou.R
 import com.example.followingyou.databinding.FragmentSingUpBinding
-import com.example.followingyou.presentation.NewsListFragment
+import com.example.followingyou.presentation.newsList.NewsListFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

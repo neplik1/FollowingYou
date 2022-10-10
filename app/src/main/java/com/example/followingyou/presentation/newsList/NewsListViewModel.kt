@@ -1,4 +1,4 @@
-package com.example.followingyou.presentation
+package com.example.followingyou.presentation.newsList
 
 import androidx.lifecycle.ViewModel
 import com.example.followingyou.data.NewsListRepositoryImpl

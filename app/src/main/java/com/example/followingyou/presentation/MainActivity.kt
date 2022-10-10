@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.example.followingyou.databinding.ActivityMainBinding
+import com.example.followingyou.presentation.newsList.NewsListViewModel
 
 class MainActivity : AppCompatActivity() {
 
