@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.followingyou.R
-import com.example.followingyou.presentation.SelectedNewsFragment
+import com.example.followingyou.presentation.newDetails.NewDetailsFragment
 import com.example.followingyou.presentation.newsList.adapter.NewsListAdapter
 
 class NewsListFragment : Fragment() {
@@ -71,8 +71,8 @@ class NewsListFragment : Fragment() {
 
     private fun launchSelectedNewsFragment() {
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, SelectedNewsFragment.newInstance())
-            .addToBackStack(SelectedNewsFragment.NAME)
+            .replace(R.id.fragment_container, NewDetailsFragment.newInstance())
+            .addToBackStack(NewDetailsFragment.NAME)
             .commit()
     }
 

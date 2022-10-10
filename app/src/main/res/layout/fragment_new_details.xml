@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/margin4"
-    tools:context=".presentation.SelectedNewsFragment">
+    tools:context=".presentation.newDetails.NewDetailsFragment">
 
     <TextView
         android:id="@+id/tvSource"

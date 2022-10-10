@@ -1,4 +1,4 @@
-package com.example.followingyou.presentation
+package com.example.followingyou.presentation.newDetails
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,10 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.example.followingyou.R
-import com.example.followingyou.presentation.authorization.LogInFragment
 
-class SelectedNewsFragment : Fragment() {
-    private lateinit var viewModel: SelectedNewsViewModel
+class NewDetailsFragment : Fragment() {
+    private lateinit var viewModel: NewDetailsViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -19,18 +18,18 @@ class SelectedNewsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_selected_news, container, false)
+        return inflater.inflate(R.layout.fragment_new_details, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[SelectedNewsViewModel::class.java]
+        viewModel = ViewModelProvider(this)[NewDetailsViewModel::class.java]
     }
 
     companion object {
-        const val NAME = "SelectedNewsFragment"
-        fun newInstance(): SelectedNewsFragment {
-            return SelectedNewsFragment()
+        const val NAME = "NewDetailsFragment"
+        fun newInstance(): NewDetailsFragment {
+            return NewDetailsFragment()
         }
     }
 }
