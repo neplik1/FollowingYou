@@ -2,7 +2,7 @@ package com.example.followingyou.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.followingyou.domain.NewsItem
+import com.example.followingyou.domain.model.NewsItem
 import com.example.followingyou.domain.NewsListRepository
 import kotlin.random.Random
 

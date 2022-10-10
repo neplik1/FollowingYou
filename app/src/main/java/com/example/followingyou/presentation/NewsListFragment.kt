@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.followingyou.R
+import com.example.followingyou.presentation.authorization.LogInFragment
 
 class NewsListFragment : Fragment() {
     private lateinit var viewModel: NewsListViewModel
@@ -42,7 +43,7 @@ class NewsListFragment : Fragment() {
 
     private fun setupClickListener() {
         newsListAdapter.onNewsItemClickListener = {
-            Log.d("NewsListFragment", it.toString())
+            launchSelectedNewsFragment()
         }
     }
 
@@ -66,6 +67,13 @@ class NewsListFragment : Fragment() {
         }
         val itemTouchHelper = ItemTouchHelper(callback)
         itemTouchHelper.attachToRecyclerView(rvNewsList)
+    }
+
+    private fun launchSelectedNewsFragment() {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, SelectedNewsFragment.newInstance())
+            .addToBackStack(SelectedNewsFragment.NAME)
+            .commit()
     }
 
     companion object {

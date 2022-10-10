@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.followingyou.R
-import com.example.followingyou.domain.NewsItem
+import com.example.followingyou.domain.model.NewsItem
 
 class NewsListAdapter: ListAdapter<NewsItem, NewsItemViewHolder>(NewsItemDiffCallback()) {
 
