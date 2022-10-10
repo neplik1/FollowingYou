@@ -1,4 +1,4 @@
-package com.example.followingyou.presentation
+package com.example.followingyou.presentation.authorization
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,24 +9,26 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.followingyou.R
-import com.example.followingyou.databinding.FragmentSingUpBinding
+import com.example.followingyou.databinding.FragmentChangePasswordBinding
 
-class SingUpFragment : Fragment() {
+
+class ChangePasswordFragment : Fragment() {
     private lateinit var viewModel: SingupViewModel
 
-    private var _binding: FragmentSingUpBinding? = null
-    private val binding: FragmentSingUpBinding
-        get() = _binding ?: throw RuntimeException("FragmentSingUpBinding == null")
+    private var _binding: FragmentChangePasswordBinding? = null
+    private val binding: FragmentChangePasswordBinding
+        get() = _binding ?: throw RuntimeException("FragmentChangePasswordBinding == null")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSingUpBinding.inflate(inflater, container, false)
+        _binding = FragmentChangePasswordBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -41,7 +43,7 @@ class SingUpFragment : Fragment() {
             }
         }
         viewModel.isPasswordFieldCorrect.observe(viewLifecycleOwner) { correct ->
-            binding.etPassword.error = if (correct) {
+            binding.etNewPassword.error = if (correct) {
                 null
             } else {
                 getString(R.string.error_password_text)
@@ -64,62 +66,36 @@ class SingUpFragment : Fragment() {
             etEmail.addTextChangedListener {
                 viewModel.resetErrors()
             }
-            etPassword.addTextChangedListener {
+            etNewPassword.addTextChangedListener {
                 viewModel.resetErrors()
             }
             etConfirmPassword.addTextChangedListener {
                 viewModel.resetErrors()
             }
-            toggleLogInButton.setOnClickListener {
-                launchChooseLogInFragment()
-            }
-            forgotPassword.setOnClickListener {
-                launchChangePasswordFragment()
-            }
         }
-        launchAddMode()
+        launchChangeMode()
     }
 
-    private fun launchChooseLogInFragment() {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, LogInFragment.newInstance())
-            .addToBackStack(LogInFragment.NAME)
-            .commit()
-    }
-
-    private fun launchChangePasswordFragment() {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, ChangePasswordFragment.newInstance())
-            .addToBackStack(ChangePasswordFragment.NAME)
-            .commit()
-    }
-
-    private fun launchSuccessSingUp() {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, NewsListFragment.newInstance())
-            .addToBackStack(NewsListFragment.NAME)
-            .commit()
-    }
-
-    private fun launchAddMode() {
-        binding.signUpButton.setOnClickListener {
+    private fun launchChangeMode() {
+        binding.btnChangePassword.setOnClickListener {
             authorize()
-            if (binding.etEmail.text.isNullOrEmpty() || binding.etPassword.text!!.length <= 5
-                || binding.etPassword.text != binding.etConfirmPassword.text
-            ) {
-                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(context, "Sing Up", Toast.LENGTH_SHORT).show()
-                launchSuccessSingUp()
-            }
+            Toast.makeText(context, "Password changed", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun authorize() {
         val login = binding.etEmail.text?.toString() ?: ""
-        val password = binding.etPassword.text?.toString() ?: ""
+        val password = binding.etNewPassword.text?.toString() ?: ""
         val confirmPassword = binding.etConfirmPassword.text?.toString() ?: ""
         viewModel.authorize(login, password, confirmPassword)
+    }
+
+    companion object {
+        const val NAME = "ChangePasswordBindingFragment"
+
+        fun newInstance(): ChangePasswordFragment {
+            return ChangePasswordFragment()
+        }
     }
 
     override fun onDestroyView() {

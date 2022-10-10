@@ -9,12 +9,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp"
-        tools:context=".presentation.LogInFragment">
+        tools:context=".presentation.authorization.LogInFragment">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="a1@gmail.com"
             android:hint="@string/hint_email"
             android:inputType="textEmailAddress" />
 
@@ -22,6 +23,7 @@
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="1234567"
             android:hint="@string/hint_password"
             android:inputType="textPassword" />
 

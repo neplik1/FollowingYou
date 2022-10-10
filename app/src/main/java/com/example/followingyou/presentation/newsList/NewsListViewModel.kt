@@ -1,13 +1,12 @@
-package com.example.followingyou.presentation
+package com.example.followingyou.presentation.newsList
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.followingyou.data.NewsListRepositoryImpl
-import com.example.followingyou.domain.DeleteNewsItemUseCase
-import com.example.followingyou.domain.GetNewsListUseCase
-import com.example.followingyou.domain.NewsItem
+import com.example.followingyou.domain.useCase.DeleteNewsItemUseCase
+import com.example.followingyou.domain.useCase.GetNewsListUseCase
+import com.example.followingyou.domain.model.NewsItem
 
-class MainViewModel : ViewModel() {
+class NewsListViewModel : ViewModel() {
     private val repository = NewsListRepositoryImpl
 
     private val getNewsListUseCase = GetNewsListUseCase(repository)

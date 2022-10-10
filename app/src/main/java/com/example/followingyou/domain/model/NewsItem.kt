@@ -1,4 +1,4 @@
-package com.example.followingyou.domain
+package com.example.followingyou.domain.model
 
 data class NewsItem(
     val name: String,

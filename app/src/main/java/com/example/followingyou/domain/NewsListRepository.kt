@@ -1,6 +1,7 @@
 package com.example.followingyou.domain
 
 import androidx.lifecycle.LiveData
+import com.example.followingyou.domain.model.NewsItem
 
 interface NewsListRepository {
 

@@ -1,20 +1,25 @@
-package com.example.followingyou.presentation
+package com.example.followingyou.presentation.authorization
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewOutlineProvider
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.followingyou.R
 import com.example.followingyou.databinding.FragmentLogInBinding
+import com.example.followingyou.presentation.newsList.NewsListFragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class LogInFragment : Fragment() {
 
-    private lateinit var viewModel: SingupViewModel
+    private lateinit var viewModel: LoginViewModel
+    private lateinit var auth: FirebaseAuth
 
     private var _binding: FragmentLogInBinding? = null
     private val binding: FragmentLogInBinding
@@ -30,7 +35,8 @@ class LogInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[SingupViewModel::class.java]
+        auth = Firebase.auth
+        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         viewModel.isLoginFieldCorrect.observe(viewLifecycleOwner) { correct ->
             binding.etEmail.error = if (correct) {
                 null
@@ -82,11 +88,29 @@ class LogInFragment : Fragment() {
     private fun launchAddMode() {
         binding.logInButton.setOnClickListener {
             authorize()
-            if (binding.etEmail.text.isNullOrEmpty() || binding.etPassword.text!!.length <=5 ) {
+            if (binding.etEmail.text.isNullOrEmpty() || binding.etPassword.text!!.length <= 5) {
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(context, "Log In", Toast.LENGTH_SHORT).show()
-                launchSuccessLogIn()
+                auth.signInWithEmailAndPassword(binding.etEmail.text.toString().trim { it <= ' ' },
+                    binding.etPassword.text.toString().trim { it <= ' ' })
+                    .addOnCompleteListener(requireActivity()) { task ->
+                        if (task.isSuccessful) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(NAME, "signInWithEmail:success")
+                            launchSuccessLogIn()
+                            val user = auth.currentUser
+                            Toast.makeText(context, "Log In", Toast.LENGTH_SHORT).show()
+                            // updateUI(user)
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(NAME, "signInWithEmail:failure", task.exception)
+                            Toast.makeText(
+                                context, "Authentication failed.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            // updateUI(null)
+                        }
+                    }
             }
         }
     }
@@ -94,8 +118,7 @@ class LogInFragment : Fragment() {
     private fun authorize() {
         val login = binding.etEmail.text?.toString() ?: ""
         val password = binding.etPassword.text?.toString() ?: ""
-        val confirmPassword = ""
-        viewModel.authorize(login, password, confirmPassword)
+        viewModel.authorize(login, password)
     }
 
     companion object {

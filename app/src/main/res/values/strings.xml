@@ -17,4 +17,8 @@
     <string name="error_password_text">Password too short</string>
     <string name="error_email_text">Please input email</string>
     <string name="error_confirmPassword_text">Passwords have to match</string>
+
+    <string name="ok">OK</string>
+    <string name="News">News</string>
+    <string name="Source">Source</string>
 </resources>
