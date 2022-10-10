@@ -107,10 +107,12 @@ class SingUpFragment : Fragment() {
     private fun launchAddMode() {
         binding.signUpButton.setOnClickListener {
             authorize()
-            if (binding.etEmail.text.isNullOrEmpty() || binding.etPassword.text!!.length <= 5
-                || binding.etConfirmPassword.text.isNullOrEmpty()
+            val email =binding.etEmail.text
+            val password = binding.etPassword.text
+            val confirmPassword = binding.etConfirmPassword.text
+            if (email.isNullOrEmpty() || password!!.length <= 5
+                || confirmPassword.isNullOrEmpty()
             ) {
-
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
             } else {
                 auth.createUserWithEmailAndPassword(binding.etEmail.text.toString()

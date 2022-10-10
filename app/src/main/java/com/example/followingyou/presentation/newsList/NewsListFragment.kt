@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.followingyou.R
+import com.example.followingyou.databinding.FragmentChangePasswordBinding
+import com.example.followingyou.databinding.FragmentNewsListBinding
 import com.example.followingyou.presentation.newDetails.NewDetailsFragment
 import com.example.followingyou.presentation.newsList.adapter.NewsListAdapter
 
@@ -16,11 +18,16 @@ class NewsListFragment : Fragment() {
     private lateinit var viewModel: NewsListViewModel
     private lateinit var newsListAdapter: NewsListAdapter
 
+    private var _binding: FragmentNewsListBinding? = null
+    private val binding: FragmentNewsListBinding
+        get() = _binding ?: throw RuntimeException("FragmentNewsListBinding == null")
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_news_list, container, false)
+    ): View {
+        _binding = FragmentNewsListBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,7 +40,7 @@ class NewsListFragment : Fragment() {
     }
 
     private fun setupRecyclerView(view: View) {
-        val rvShopList = view.findViewById<RecyclerView>(R.id.rv_shop_list)
+        val rvShopList = binding.rvShopList
         newsListAdapter = NewsListAdapter()
         rvShopList.adapter = newsListAdapter
 
@@ -81,5 +88,10 @@ class NewsListFragment : Fragment() {
         fun newInstance(): NewsListFragment {
             return NewsListFragment()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

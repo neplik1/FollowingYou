@@ -7,18 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.example.followingyou.R
+import com.example.followingyou.databinding.FragmentNewDetailsBinding
+import com.example.followingyou.databinding.FragmentNewsListBinding
 
 class NewDetailsFragment : Fragment() {
     private lateinit var viewModel: NewDetailsViewModel
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+
+    private var _binding: FragmentNewDetailsBinding? = null
+    private val binding: FragmentNewDetailsBinding
+        get() = _binding ?: throw RuntimeException("FragmentNewDetailsBinding == null")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_new_details, container, false)
+    ): View {
+        _binding = FragmentNewDetailsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,5 +35,10 @@ class NewDetailsFragment : Fragment() {
         fun newInstance(): NewDetailsFragment {
             return NewDetailsFragment()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -19,11 +19,6 @@ class ChangePasswordFragment : Fragment() {
     private val binding: FragmentChangePasswordBinding
         get() = _binding ?: throw RuntimeException("FragmentChangePasswordBinding == null")
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
